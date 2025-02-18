@@ -21,8 +21,9 @@ class ChineseMemorialCalendar:
         """Create an ICS event with the given parameters."""
         event = ics.Event()
         event.name = name
-        event.begin = date
-        event.duration = timedelta(days=1)
+        # Set as all-day event by setting begin to midnight and making it a 24-hour duration
+        event.begin = date.replace(hour=0, minute=0, second=0, microsecond=0)
+        event.make_all_day()
         event.description = description
         return event
 
