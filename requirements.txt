@@ -1,5 +1,4 @@
 ics
-pytz
 pyyaml
 lunarcalendar
 typing
