@@ -222,18 +222,6 @@ class ChineseMemorialCalendar:
             filepath = self._save_event_to_file(event, filename)
             generated_files.append(filepath)
 
-        # Also generate a combined calendar
-        combined_calendar = ics.Calendar()
-        for _, event in (self.generate_solar_calendar_events() +
-                         self.generate_lunar_calendar_events() +
-                         self.generate_anniversary_events()):
-            combined_calendar.events.add(event)
-
-        combined_filepath = os.path.join(self.output_dir, f"all_events_{self.year}.ics")
-        with open(combined_filepath, 'w', encoding='utf-8') as f:
-            f.write(str(combined_calendar))
-        generated_files.append(combined_filepath)
-
         return generated_files
 
 
