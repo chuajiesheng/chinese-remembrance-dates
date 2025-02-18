@@ -17,6 +17,19 @@ class ChineseMemorialCalendar:
         # Create output directory if it doesn't exist
         os.makedirs(self.output_dir, exist_ok=True)
 
+    def _create_multiday_event(self, name: str, start_date: datetime, end_date: datetime,
+                               description: str) -> ics.Event:
+        """Create a multi-day ICS event with the given parameters."""
+        event = ics.Event()
+        event.name = name
+        # Set as all-day event starting from start_date
+        event.begin = start_date.replace(hour=0, minute=0, second=0, microsecond=0)
+        # End date should be the day after the last day (as per iCal spec)
+        event.end = (end_date + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
+        event.make_all_day()
+        event.description = description
+        return event
+
     def _create_event(self, name: str, date: datetime, description: str) -> ics.Event:
         """Create an ICS event with the given parameters."""
         event = ics.Event()
@@ -89,20 +102,29 @@ class ChineseMemorialCalendar:
         """Generate events for lunar calendar dates."""
         events = []
 
-        # Hungry Ghost Festival (7th month, 15th day)
-        ghost_festival_date = self._lunar_to_solar(7, 15)
+        # Hungry Ghost Festival Month (7th lunar month)
+        ghost_month_start = self._lunar_to_solar(7, 1)  # First day of 7th month
+        ghost_month_end = self._lunar_to_solar(7, 30)  # Last day of 7th month
         ghost_festival_desc = (
-            "中元节 - Hungry Ghost Festival\n"
-            "Traditional day for making offerings to ancestors and wandering spirits.\n"
-            "The entire 7th lunar month is considered significant.\n"
+            "中元节 - Ghost Month (鬼月)\n"
+            "The entire 7th lunar month is the Ghost Month, with the 15th day being the Ghost Festival peak.\n"
+            "Traditional practices include:\n"
+            "- Making offerings to ancestors and wandering spirits\n"
+            "- Burning joss paper and incense\n"
+            "- Avoiding major life changes or events\n\n"
+            "Peak Day (15th): 中元节\n"
             "Traditional offerings include:\n"
             "- Incense (香)\n"
             "- Food offerings (食品)\n"
-            "- Joss paper (纸钱)"
+            "- Joss paper (纸钱)\n"
+            "- Fruits (水果)\n"
+            "- Tea (茶)"
         )
-        events.append(("ghost_festival.ics",
-                       self._create_event("Hungry Ghost Festival 中元节",
-                                          ghost_festival_date, ghost_festival_desc)))
+        events.append(("ghost_month.ics",
+                       self._create_multiday_event("Ghost Month 鬼月",
+                                                   ghost_month_start,
+                                                   ghost_month_end,
+                                                   ghost_festival_desc)))
 
         # Chinese New Year's Eve
         # Get the first day of the next lunar year and subtract one day
