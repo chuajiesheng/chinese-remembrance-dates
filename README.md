@@ -110,7 +110,6 @@ The script generates the following ICS files in the output directory:
   - `ghost_festival.ics`
   - `chinese_new_year_eve.ics`
   - Individual anniversary files for each configured memorial date
-- Combined calendar file: `all_events_[YEAR].ics`
 
 ## Importing Calendar Files
 
@@ -127,16 +126,6 @@ The script generates the following ICS files in the output directory:
 3. Other Calendar Applications:
    - Most calendar applications support importing ICS files
    - Look for an "Import" or "Add Calendar" option
-
-## Traditional Offerings Reference
-
-The calendar events include reminders for traditional offerings:
-- Incense (香)
-- Fresh flowers (鲜花)
-- Food offerings (食品)
-- Joss paper (纸钱)
-- Fruits (水果)
-- Tea (茶)
 
 ## Contributing
 
