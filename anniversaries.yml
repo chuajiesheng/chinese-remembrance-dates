@@ -1,0 +1,18 @@
+anniversaries:
+  - name: "Grandfather"
+    chinese_name: "爷爷"
+    lunar_month: 3
+    lunar_day: 15
+    notes: "Family gathering at ancestral home"
+
+  - name: "Grandmother"
+    chinese_name: "奶奶"
+    lunar_month: 7
+    lunar_day: 24
+    notes: "Remember to bring her favorite chrysanthemum tea"
+
+  - name: "Great Aunt"
+    chinese_name: "大姑"
+    lunar_month: 11
+    lunar_day: 8
+    notes: ""
