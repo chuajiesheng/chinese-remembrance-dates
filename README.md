@@ -52,7 +52,7 @@ source venv/bin/activate
 
 3. Install the required dependencies:
 ```bash
-pip install ics pytz pyyaml lunarcalendar
+pip install -r requirements.txt
 ```
 
 ## Configuration
