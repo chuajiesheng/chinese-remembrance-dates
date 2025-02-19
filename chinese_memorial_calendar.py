@@ -64,9 +64,11 @@ class ChineseMemorialCalendar:
         calendar = ics.Calendar()
         calendar.events.add(event)
 
+        print(event.name, ':', event.begin.date())
+
         filepath = os.path.join(self.output_dir, filename.replace(',', ''))
         with open(filepath, 'w', encoding='utf-8') as f:
-            f.write(str(calendar))
+            f.write(str(calendar.serialize()))
         return filepath
 
     def generate_solar_calendar_events(self) -> List[Tuple[str, ics.Event]]:
