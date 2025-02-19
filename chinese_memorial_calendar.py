@@ -64,7 +64,7 @@ class ChineseMemorialCalendar:
         calendar = ics.Calendar()
         calendar.events.add(event)
 
-        filepath = os.path.join(self.output_dir, filename)
+        filepath = os.path.join(self.output_dir, filename.replace(',', ''))
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(str(calendar))
         return filepath
