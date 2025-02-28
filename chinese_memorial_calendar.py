@@ -186,30 +186,15 @@ class ChineseMemorialCalendar:
                 name = f"{name} ({anniversary['chinese_name']})"
 
             description = (
-                f"{name} Death Anniversary 忌日\n"
+                f"{name}\n"
                 f"Lunar Date: {anniversary['lunar_month']}月{anniversary['lunar_day']}日\n"
-            )
-
-            if anniversary['notes']:
-                description += f"\nNotes: {anniversary['notes']}\n"
-
-            description += (
-                "\nTraditional offerings include:\n"
-                "- Incense (香)\n"
-                "- Fresh flowers (鲜花)\n"
-                "- Food offerings (食品)\n"
-                "- Tea (茶)"
+                f"\nNotes: {anniversary['notes'] if anniversary['notes'] else ''}\n"
             )
 
             # Create sanitized filename
-            filename = f"anniversary_{anniversary['name'].lower().replace(' ', '_')}.ics"
-
-            events.append((filename,
-                           self._create_event(
-                               f"{name} Death Anniversary 忌日",
-                               date,
-                               description
-                           )))
+            filename = f"anniversary_{anniversary['name']}.ics"
+            filename = filename.lower().replace(' ', '_').replace('\'', '')
+            events.append((filename, self._create_event(f"{name}", date, description)))
 
         return events
 
